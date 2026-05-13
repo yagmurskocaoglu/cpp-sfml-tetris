@@ -12,6 +12,10 @@ Tetromino::Tetromino(int size) {
         sf::Vector2i(2, 1)
     };
 }
+void Tetromino::move(int dx, int dy) {
+    posX += dx;
+    posY += dy;
+}
 
 void Tetromino::draw(sf::RenderWindow& window) {
     sf::RectangleShape block(sf::Vector2f(cellSize - 1, cellSize - 1));

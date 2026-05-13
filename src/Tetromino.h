@@ -13,7 +13,8 @@ private:
 
 public:
     Tetromino(int size);
-
+    
+    void move(int dx, int dy);
     void draw(sf::RenderWindow& window);
 };
 
