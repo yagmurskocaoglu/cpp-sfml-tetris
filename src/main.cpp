@@ -33,7 +33,13 @@ int main() {
             }
         }
         if (clock.getElapsedTime().asSeconds() >= fallInterval) {
-    currentPiece.move(0, 1, 10, 20);
+    bool moved = currentPiece.move(0, 1, 10, 20);
+
+    if (!moved) {
+        board.placeBlocks(currentPiece.getBlocks());
+        currentPiece = Tetromino(30);
+    }
+
     clock.restart();
 }
 

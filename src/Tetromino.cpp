@@ -29,11 +29,22 @@ bool Tetromino::canMove(int dx, int dy, int boardCols, int boardRows) const {
     return true;
 }
 
-void Tetromino::move(int dx, int dy, int boardCols, int boardRows) {
+bool Tetromino::move(int dx, int dy, int boardCols, int boardRows) {
     if (canMove(dx, dy, boardCols, boardRows)) {
         posX += dx;
         posY += dy;
+        return true;
     }
+    return false;
+}
+std::vector<sf::Vector2i> Tetromino::getBlocks() const {
+    std::vector<sf::Vector2i> result;
+
+    for (const auto& b : blocks) {
+        result.push_back(sf::Vector2i(posX + b.x, posY + b.y));
+    }
+
+    return result;
 }
 
 void Tetromino::draw(sf::RenderWindow& window) {
