@@ -11,10 +11,12 @@ private:
     int posX;
     int posY;
 
+    bool canMove(int dx, int dy, int boardCols, int boardRows) const;
+
 public:
     Tetromino(int size);
-    
-    void move(int dx, int dy);
+
+    void move(int dx, int dy, int boardCols, int boardRows);
     void draw(sf::RenderWindow& window);
 };
 

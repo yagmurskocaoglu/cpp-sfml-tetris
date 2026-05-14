@@ -17,15 +17,15 @@ int main() {
 
             if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
                 if (keyPressed->code == sf::Keyboard::Key::Left) {
-                    currentPiece.move(-1, 0);
+                    currentPiece.move(-1, 0,10,20);
                 }
 
                 if (keyPressed->code == sf::Keyboard::Key::Right) {
-                    currentPiece.move(1, 0);
+                    currentPiece.move(1, 0,10,20);
                 }
 
                 if (keyPressed->code == sf::Keyboard::Key::Down) {
-                    currentPiece.move(0, 1);
+                    currentPiece.move(0, 1,10,20);
                 }
             }
         }
