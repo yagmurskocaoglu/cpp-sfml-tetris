@@ -9,6 +9,9 @@ int main() {
     Board board(20, 10, 30);
     Tetromino currentPiece(30);
 
+    sf::Clock clock;
+    float fallInterval = 0.5f;
+
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
@@ -29,6 +32,10 @@ int main() {
                 }
             }
         }
+        if (clock.getElapsedTime().asSeconds() >= fallInterval) {
+    currentPiece.move(0, 1, 10, 20);
+    clock.restart();
+}
 
         window.clear(sf::Color::Black);
 
