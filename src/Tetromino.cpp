@@ -1,16 +1,76 @@
 #include "Tetromino.h"
+#include <cstdlib>
 
 Tetromino::Tetromino(int size) {
     cellSize = size;
     posX = 4;
     posY = 0;
 
-    blocks = {
-        sf::Vector2i(1, 0),
-        sf::Vector2i(0, 1),
-        sf::Vector2i(1, 1),
-        sf::Vector2i(2, 1)
-    };
+   int type = std::rand() % 7;
+
+    if (type == 0) { 
+        // I parçası
+        blocks = {
+            sf::Vector2i(0, 1),
+            sf::Vector2i(1, 1),
+            sf::Vector2i(2, 1),
+            sf::Vector2i(3, 1)
+        };
+    } 
+    else if (type == 1) { 
+        // O parçası
+        blocks = {
+            sf::Vector2i(0, 0),
+            sf::Vector2i(1, 0),
+            sf::Vector2i(0, 1),
+            sf::Vector2i(1, 1)
+        };
+    } 
+    else if (type == 2) { 
+        // T parçası
+        blocks = {
+            sf::Vector2i(1, 0),
+            sf::Vector2i(0, 1),
+            sf::Vector2i(1, 1),
+            sf::Vector2i(2, 1)
+        };
+    } 
+    else if (type == 3) { 
+        // L parçası
+        blocks = {
+            sf::Vector2i(0, 0),
+            sf::Vector2i(0, 1),
+            sf::Vector2i(1, 1),
+            sf::Vector2i(2, 1)
+        };
+    } 
+    else if (type == 4) { 
+        // J parçası
+        blocks = {
+            sf::Vector2i(2, 0),
+            sf::Vector2i(0, 1),
+            sf::Vector2i(1, 1),
+            sf::Vector2i(2, 1)
+        };
+    } 
+    else if (type == 5) { 
+        // S parçası
+        blocks = {
+            sf::Vector2i(1, 0),
+            sf::Vector2i(2, 0),
+            sf::Vector2i(0, 1),
+            sf::Vector2i(1, 1)
+        };
+    } 
+    else { 
+        // Z parçası
+        blocks = {
+            sf::Vector2i(0, 0),
+            sf::Vector2i(1, 0),
+            sf::Vector2i(1, 1),
+            sf::Vector2i(2, 1)
+        };
+    }
 }
 bool Tetromino::canMove(int dx, int dy, const Board& board) const {
     for (const auto& b : blocks) {

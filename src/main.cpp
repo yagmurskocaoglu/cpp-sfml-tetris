@@ -1,10 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include <optional>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "Board.h"
 #include "Tetromino.h"
 
 int main() {
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
     sf::RenderWindow window(sf::VideoMode({800, 600}), "Tetris");
 
     Board board(20, 10, 30);
