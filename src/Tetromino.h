@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Board.h"
 
 class Tetromino {
 private:
@@ -11,12 +12,12 @@ private:
     int posX;
     int posY;
 
-    bool canMove(int dx, int dy, int boardCols, int boardRows) const;
+    bool canMove(int dx, int dy, const Board& board) const;
 
 public:
     Tetromino(int size);
 
-    bool move(int dx, int dy, int boardCols, int boardRows);
+    bool move(int dx, int dy, const Board& board);
     std::vector<sf::Vector2i> getBlocks() const;
     void draw(sf::RenderWindow& window);
 };

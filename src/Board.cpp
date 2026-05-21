@@ -7,6 +7,14 @@ Board::Board(int r, int c, int size) {
 
     grid = std::vector<std::vector<int>>(rows, std::vector<int>(cols, 0));
 }
+bool Board::isCellEmpty(int x, int y) const {
+    if (x < 0 || x >= cols || y < 0 || y >= rows) {
+        return false;
+    }
+
+    return grid[y][x] == 0;
+}
+
 void Board::placeBlocks(const std::vector<sf::Vector2i>& blocks) {
     for (const auto& b : blocks) {
         if (b.y >= 0 && b.y < rows && b.x >= 0 && b.x < cols) {

@@ -12,16 +12,12 @@ Tetromino::Tetromino(int size) {
         sf::Vector2i(2, 1)
     };
 }
-bool Tetromino::canMove(int dx, int dy, int boardCols, int boardRows) const {
+bool Tetromino::canMove(int dx, int dy, const Board& board) const {
     for (const auto& b : blocks) {
         int newX = posX + b.x + dx;
         int newY = posY + b.y + dy;
 
-        if (newX < 0 || newX >= boardCols) {
-            return false;
-        }
-
-        if (newY < 0 || newY >= boardRows) {
+        if (!board.isCellEmpty(newX, newY)) {
             return false;
         }
     }
@@ -29,12 +25,13 @@ bool Tetromino::canMove(int dx, int dy, int boardCols, int boardRows) const {
     return true;
 }
 
-bool Tetromino::move(int dx, int dy, int boardCols, int boardRows) {
-    if (canMove(dx, dy, boardCols, boardRows)) {
+bool Tetromino::move(int dx, int dy, const Board& board) {
+    if (canMove(dx, dy, board)) {
         posX += dx;
         posY += dy;
         return true;
     }
+
     return false;
 }
 std::vector<sf::Vector2i> Tetromino::getBlocks() const {
