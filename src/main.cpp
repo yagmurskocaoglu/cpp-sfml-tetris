@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 #include "Board.h"
 #include "Tetromino.h"
 
@@ -16,6 +17,8 @@ int main() {
 
     int score = 0;
     bool gameOver = false;
+
+    window.setTitle("Tetris | Skor: " + std::to_string(score));
 
     sf::Clock clock;
     float fallInterval = 0.5f;
@@ -58,13 +61,15 @@ int main() {
                 if (clearedRows > 0) {
                     score += clearedRows * 100;
                     std::cout << "Skor: " << score << std::endl;
+                    window.setTitle("Tetris | Skor: " + std::to_string(score));
                 }
 
                 currentPiece = Tetromino(30);
 
                 if (!board.canPlaceBlocks(currentPiece.getBlocks())) {
                     gameOver = true;
-                    std::cout << "Game Over! Final score: " << score << std::endl;
+                    std::cout << "Oyun bitti! Final skor: " << score << std::endl;
+                    window.setTitle("GAME OVER | Final skor: " + std::to_string(score));
                 }
             }
 
