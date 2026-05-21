@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <optional>
+#include <iostream>
 #include "Board.h"
 #include "Tetromino.h"
 
@@ -8,6 +9,7 @@ int main() {
 
     Board board(20, 10, 30);
     Tetromino currentPiece(30);
+    int score=0;
 
     sf::Clock clock;
     float fallInterval = 0.5f;
@@ -36,10 +38,17 @@ int main() {
     bool moved = currentPiece.move(0, 1, board);
 
     if (!moved) {
-        board.placeBlocks(currentPiece.getBlocks());
-         board.clearFullRows();
-        currentPiece = Tetromino(30);
+    board.placeBlocks(currentPiece.getBlocks());
+
+    int clearedRows = board.clearFullRows();
+
+    if (clearedRows > 0) {
+        score += clearedRows * 100;
+        std::cout << "Skor: " << score << std::endl;
     }
+
+    currentPiece = Tetromino(30);
+}
 
     clock.restart();
 }
