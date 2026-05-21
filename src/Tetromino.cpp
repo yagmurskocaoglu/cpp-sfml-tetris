@@ -94,6 +94,26 @@ bool Tetromino::move(int dx, int dy, const Board& board) {
 
     return false;
 }
+
+void Tetromino::rotate(const Board& board) {
+    std::vector<sf::Vector2i> rotatedBlocks;
+
+    for (const auto& b : blocks) {
+        rotatedBlocks.push_back(sf::Vector2i(-b.y, b.x));
+    }
+
+    for (const auto& b : rotatedBlocks) {
+        int newX = posX + b.x;
+        int newY = posY + b.y;
+
+        if (!board.isCellEmpty(newX, newY)) {
+            return;
+        }
+    }
+
+    blocks = rotatedBlocks;
+}
+
 std::vector<sf::Vector2i> Tetromino::getBlocks() const {
     std::vector<sf::Vector2i> result;
 

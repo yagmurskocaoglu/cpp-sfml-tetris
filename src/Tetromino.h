@@ -18,6 +18,7 @@ public:
     Tetromino(int size);
 
     bool move(int dx, int dy, const Board& board);
+    void rotate(const Board& board);
     std::vector<sf::Vector2i> getBlocks() const;
     void draw(sf::RenderWindow& window);
 };

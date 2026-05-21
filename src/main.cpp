@@ -35,6 +35,9 @@ int main() {
                 if (keyPressed->code == sf::Keyboard::Key::Down) {
                     currentPiece.move(0, 1,board);
                 }
+                if (keyPressed->code == sf::Keyboard::Key::Up) {
+    currentPiece.rotate(board);
+}
             }
         }
         if (clock.getElapsedTime().asSeconds() >= fallInterval) {
