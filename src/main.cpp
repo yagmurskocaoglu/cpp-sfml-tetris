@@ -37,6 +37,7 @@ int main() {
 
     if (!moved) {
         board.placeBlocks(currentPiece.getBlocks());
+         board.clearFullRows();
         currentPiece = Tetromino(30);
     }
 

@@ -23,6 +23,31 @@ void Board::placeBlocks(const std::vector<sf::Vector2i>& blocks) {
     }
 }
 
+int Board::clearFullRows() {
+    int clearedRows = 0;
+
+    for (int row = rows - 1; row >= 0; row--) {
+        bool full = true;
+
+        for (int col = 0; col < cols; col++) {
+            if (grid[row][col] == 0) {
+                full = false;
+                break;
+            }
+        }
+
+        if (full) {
+            grid.erase(grid.begin() + row);
+            grid.insert(grid.begin(), std::vector<int>(cols, 0));
+            clearedRows++;
+
+            row++;
+        }
+    }
+
+    return clearedRows;
+}
+
 void Board::draw(sf::RenderWindow& window) {
     sf::RectangleShape cell(sf::Vector2f(cellSize - 1, cellSize - 1));
 
