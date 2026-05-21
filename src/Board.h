@@ -15,6 +15,7 @@ public:
     Board(int r, int c, int size);
 
     bool isCellEmpty(int x, int y) const;
+    bool canPlaceBlocks(const std::vector<sf::Vector2i>& blocks) const;
     void placeBlocks(const std::vector<sf::Vector2i>& blocks);
     int clearFullRows();
     void draw(sf::RenderWindow& window);

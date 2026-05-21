@@ -15,6 +15,16 @@ bool Board::isCellEmpty(int x, int y) const {
     return grid[y][x] == 0;
 }
 
+bool Board::canPlaceBlocks(const std::vector<sf::Vector2i>& blocks) const {
+    for (const auto& b : blocks) {
+        if (!isCellEmpty(b.x, b.y)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 void Board::placeBlocks(const std::vector<sf::Vector2i>& blocks) {
     for (const auto& b : blocks) {
         if (b.y >= 0 && b.y < rows && b.x >= 0 && b.x < cols) {
