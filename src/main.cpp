@@ -15,6 +15,15 @@ int main() {
     Board board(20, 10, 30);
     Tetromino currentPiece(30);
 
+    sf::RectangleShape sidePanel(sf::Vector2f(500, 600));
+   sidePanel.setPosition(sf::Vector2f(300, 0));
+    sidePanel.setFillColor(sf::Color(15, 15, 15));
+
+    sf::RectangleShape separator(sf::Vector2f(2, 600));
+   separator.setPosition(sf::Vector2f(300, 0));
+   separator.setFillColor(sf::Color(80, 80, 80));
+
+
     int score = 0;
     bool gameOver = false;
 
@@ -79,6 +88,9 @@ int main() {
         window.clear(sf::Color::Black);
 
         board.draw(window);
+
+        window.draw(sidePanel);
+        window.draw(separator);
 
         if (!gameOver) {
             currentPiece.draw(window);
