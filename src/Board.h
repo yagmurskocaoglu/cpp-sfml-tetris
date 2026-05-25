@@ -16,7 +16,7 @@ public:
 
     bool isCellEmpty(int x, int y) const;
     bool canPlaceBlocks(const std::vector<sf::Vector2i>& blocks) const;
-    void placeBlocks(const std::vector<sf::Vector2i>& blocks);
+    void placeBlocks(const std::vector<sf::Vector2i>& blocks,int colorId);
     int clearFullRows();
     void draw(sf::RenderWindow& window);
 };

@@ -10,6 +10,7 @@ Tetromino::Tetromino(int size) {
 
     if (type == 0) { 
         // I parçası
+        colorId = 1;
         blocks = {
             sf::Vector2i(0, 1),
             sf::Vector2i(1, 1),
@@ -19,6 +20,7 @@ Tetromino::Tetromino(int size) {
     } 
     else if (type == 1) { 
         // O parçası
+        colorId = 2;
         blocks = {
             sf::Vector2i(0, 0),
             sf::Vector2i(1, 0),
@@ -28,6 +30,7 @@ Tetromino::Tetromino(int size) {
     } 
     else if (type == 2) { 
         // T parçası
+        colorId = 3;
         blocks = {
             sf::Vector2i(1, 0),
             sf::Vector2i(0, 1),
@@ -37,6 +40,7 @@ Tetromino::Tetromino(int size) {
     } 
     else if (type == 3) { 
         // L parçası
+        colorId = 4;
         blocks = {
             sf::Vector2i(0, 0),
             sf::Vector2i(0, 1),
@@ -46,6 +50,7 @@ Tetromino::Tetromino(int size) {
     } 
     else if (type == 4) { 
         // J parçası
+        colorId = 5;
         blocks = {
             sf::Vector2i(2, 0),
             sf::Vector2i(0, 1),
@@ -55,6 +60,7 @@ Tetromino::Tetromino(int size) {
     } 
     else if (type == 5) { 
         // S parçası
+        colorId = 6;
         blocks = {
             sf::Vector2i(1, 0),
             sf::Vector2i(2, 0),
@@ -64,6 +70,7 @@ Tetromino::Tetromino(int size) {
     } 
     else { 
         // Z parçası
+        colorId = 7;
         blocks = {
             sf::Vector2i(0, 0),
             sf::Vector2i(1, 0),
@@ -124,9 +131,33 @@ std::vector<sf::Vector2i> Tetromino::getBlocks() const {
     return result;
 }
 
+int Tetromino::getColorId() const {
+    return colorId;
+}
+
 void Tetromino::draw(sf::RenderWindow& window) {
     sf::RectangleShape block(sf::Vector2f(cellSize - 1, cellSize - 1));
+   if (colorId == 1) {
+    block.setFillColor(sf::Color::Cyan);
+}
+else if (colorId == 2) {
+    block.setFillColor(sf::Color::Yellow);
+}
+else if (colorId == 3) {
+    block.setFillColor(sf::Color::Magenta);
+}
+else if (colorId == 4) {
+    block.setFillColor(sf::Color(255, 140, 0));
+}
+else if (colorId == 5) {
+    block.setFillColor(sf::Color::Blue);
+}
+else if (colorId == 6) {
+    block.setFillColor(sf::Color::Green);
+}
+else if (colorId == 7) {
     block.setFillColor(sf::Color::Red);
+}
 
     for (const auto& b : blocks) {
         block.setPosition(sf::Vector2f(

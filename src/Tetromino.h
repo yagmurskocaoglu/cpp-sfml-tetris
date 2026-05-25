@@ -11,11 +11,13 @@ private:
     int cellSize;
     int posX;
     int posY;
+    int colorId;
 
     bool canMove(int dx, int dy, const Board& board) const;
 
 public:
     Tetromino(int size);
+    int getColorId() const;
 
     bool move(int dx, int dy, const Board& board);
     void rotate(const Board& board);

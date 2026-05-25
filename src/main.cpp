@@ -80,7 +80,7 @@ gameOverText.setFillColor(sf::Color::Red);
             bool moved = currentPiece.move(0, 1, board);
 
             if (!moved) {
-                board.placeBlocks(currentPiece.getBlocks());
+                board.placeBlocks(currentPiece.getBlocks(),currentPiece.getColorId());
 
                 int clearedRows = board.clearFullRows();
 
@@ -112,7 +112,7 @@ gameOverText.setFillColor(sf::Color::Red);
         window.draw(sidePanel);
         window.draw(separator);
         window.draw(titleText);
-        
+
         window.draw(scoreText);
         window.draw(gameOverText);
 

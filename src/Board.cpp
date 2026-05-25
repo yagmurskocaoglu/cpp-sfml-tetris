@@ -25,10 +25,10 @@ bool Board::canPlaceBlocks(const std::vector<sf::Vector2i>& blocks) const {
     return true;
 }
 
-void Board::placeBlocks(const std::vector<sf::Vector2i>& blocks) {
+void Board::placeBlocks(const std::vector<sf::Vector2i>& blocks,int colorId) {
     for (const auto& b : blocks) {
         if (b.y >= 0 && b.y < rows && b.x >= 0 && b.x < cols) {
-            grid[b.y][b.x] = 1;
+            grid[b.y][b.x] = colorId;
         }
     }
 }
@@ -66,10 +66,29 @@ void Board::draw(sf::RenderWindow& window) {
             cell.setPosition(sf::Vector2f(col * cellSize, row * cellSize));
 
             if (grid[row][col] == 0) {
-                cell.setFillColor(sf::Color(30, 30, 30));
-            } else {
-                cell.setFillColor(sf::Color::Cyan);
-            }
+    cell.setFillColor(sf::Color(30, 30, 30));
+}
+else if (grid[row][col] == 1) {
+    cell.setFillColor(sf::Color::Cyan);
+}
+else if (grid[row][col] == 2) {
+    cell.setFillColor(sf::Color::Yellow);
+}
+else if (grid[row][col] == 3) {
+    cell.setFillColor(sf::Color::Magenta);
+}
+else if (grid[row][col] == 4) {
+    cell.setFillColor(sf::Color(255, 140, 0));
+}
+else if (grid[row][col] == 5) {
+    cell.setFillColor(sf::Color::Blue);
+}
+else if (grid[row][col] == 6) {
+    cell.setFillColor(sf::Color::Green);
+}
+else if (grid[row][col] == 7) {
+    cell.setFillColor(sf::Color::Red);
+}
 
             window.draw(cell);
         }
