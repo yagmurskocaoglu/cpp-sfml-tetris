@@ -23,6 +23,23 @@ int main() {
    separator.setPosition(sf::Vector2f(300, 0));
    separator.setFillColor(sf::Color(80, 80, 80));
 
+   sf::Font font;
+if (!font.openFromFile("assets/arial.ttf")) {
+    std::cout << "Font dosyasi yuklenemedi!" << std::endl;
+}
+
+sf::Text titleText(font, "TETRIS", 36);
+titleText.setPosition(sf::Vector2f(380, 80));
+titleText.setFillColor(sf::Color::White);
+
+sf::Text scoreText(font, "Skor: 0", 24);
+scoreText.setPosition(sf::Vector2f(380, 160));
+scoreText.setFillColor(sf::Color::White);
+
+sf::Text gameOverText(font, "", 28);
+gameOverText.setPosition(sf::Vector2f(360, 260));
+gameOverText.setFillColor(sf::Color::Red);
+
 
     int score = 0;
     bool gameOver = false;
@@ -70,6 +87,7 @@ int main() {
                 if (clearedRows > 0) {
                     score += clearedRows * 100;
                     std::cout << "Skor: " << score << std::endl;
+                     scoreText.setString("Skor: " + std::to_string(score));
                     window.setTitle("Tetris | Skor: " + std::to_string(score));
                 }
 
@@ -78,6 +96,8 @@ int main() {
                 if (!board.canPlaceBlocks(currentPiece.getBlocks())) {
                     gameOver = true;
                     std::cout << "Oyun bitti! Final skor: " << score << std::endl;
+
+                     gameOverText.setString("GAME OVER");
                     window.setTitle("GAME OVER | Final skor: " + std::to_string(score));
                 }
             }
@@ -91,6 +111,11 @@ int main() {
 
         window.draw(sidePanel);
         window.draw(separator);
+        window.draw(titleText);
+        
+        window.draw(scoreText);
+        window.draw(gameOverText);
+
 
         if (!gameOver) {
             currentPiece.draw(window);
