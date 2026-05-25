@@ -14,6 +14,7 @@ int main() {
 
     Board board(20, 10, 30);
     Tetromino currentPiece(30);
+    Tetromino nextPiece(30);
 
     sf::RectangleShape sidePanel(sf::Vector2f(500, 600));
    sidePanel.setPosition(sf::Vector2f(300, 0));
@@ -35,6 +36,10 @@ titleText.setFillColor(sf::Color::White);
 sf::Text scoreText(font, "Skor: 0", 24);
 scoreText.setPosition(sf::Vector2f(380, 160));
 scoreText.setFillColor(sf::Color::White);
+
+sf::Text nextText(font, "Sonraki:", 24);
+nextText.setPosition(sf::Vector2f(380, 220));
+nextText.setFillColor(sf::Color::White);
 
 sf::Text gameOverText(font, "", 28);
 gameOverText.setPosition(sf::Vector2f(360, 260));
@@ -91,7 +96,9 @@ gameOverText.setFillColor(sf::Color::Red);
                     window.setTitle("Tetris | Skor: " + std::to_string(score));
                 }
 
-                currentPiece = Tetromino(30);
+                currentPiece = nextPiece;
+                nextPiece = Tetromino(30);
+
 
                 if (!board.canPlaceBlocks(currentPiece.getBlocks())) {
                     gameOver = true;
@@ -114,6 +121,8 @@ gameOverText.setFillColor(sf::Color::Red);
         window.draw(titleText);
 
         window.draw(scoreText);
+        window.draw(nextText);
+        nextPiece.drawPreview(window, 400, 270); 
         window.draw(gameOverText);
 
 

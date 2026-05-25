@@ -23,6 +23,7 @@ public:
     void rotate(const Board& board);
     std::vector<sf::Vector2i> getBlocks() const;
     void draw(sf::RenderWindow& window);
+    void drawPreview(sf::RenderWindow& window, int startX, int startY) const;
 };
 
 #endif
