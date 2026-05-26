@@ -58,6 +58,12 @@ int Board::clearFullRows() {
     return clearedRows;
 }
 
+
+void Board::reset() {
+    grid = std::vector<std::vector<int>>(rows, std::vector<int>(cols, 0));
+}
+
+
 void Board::draw(sf::RenderWindow& window) {
     sf::RectangleShape cell(sf::Vector2f(cellSize - 1, cellSize - 1));
 

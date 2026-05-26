@@ -45,6 +45,10 @@ sf::Text gameOverText(font, "", 28);
 gameOverText.setPosition(sf::Vector2f(360, 260));
 gameOverText.setFillColor(sf::Color::Red);
 
+sf::Text restartText(font, "", 20);
+restartText.setPosition(sf::Vector2f(350, 400));
+restartText.setFillColor(sf::Color::White);
+
 
     int score = 0;
     bool gameOver = false;
@@ -60,25 +64,39 @@ gameOverText.setFillColor(sf::Color::Red);
                 window.close();
             }
 
-            if (!gameOver) {
-                if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-                    if (keyPressed->code == sf::Keyboard::Key::Left) {
-                        currentPiece.move(-1, 0, board);
-                    }
+            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+    if (gameOver && keyPressed->code == sf::Keyboard::Key::R) {
+        board.reset();
+        currentPiece = Tetromino(30);
+        nextPiece = Tetromino(30);
 
-                    if (keyPressed->code == sf::Keyboard::Key::Right) {
-                        currentPiece.move(1, 0, board);
-                    }
+        score = 0;
+        gameOver = false;
 
-                    if (keyPressed->code == sf::Keyboard::Key::Down) {
-                        currentPiece.move(0, 1, board);
-                    }
+        scoreText.setString("Skor: 0");
+        gameOverText.setString("");
+        restartText.setString("");
+        window.setTitle("Tetris | Skor: 0");
+    }
 
-                    if (keyPressed->code == sf::Keyboard::Key::Up) {
-                        currentPiece.rotate(board);
-                    }
-                }
-            }
+    if (!gameOver) {
+        if (keyPressed->code == sf::Keyboard::Key::Left) {
+            currentPiece.move(-1, 0, board);
+        }
+
+        if (keyPressed->code == sf::Keyboard::Key::Right) {
+            currentPiece.move(1, 0, board);
+        }
+
+        if (keyPressed->code == sf::Keyboard::Key::Down) {
+            currentPiece.move(0, 1, board);
+        }
+
+        if (keyPressed->code == sf::Keyboard::Key::Up) {
+            currentPiece.rotate(board);
+        }
+    }
+}
         }
 
         if (!gameOver && clock.getElapsedTime().asSeconds() >= fallInterval) {
@@ -105,6 +123,7 @@ gameOverText.setFillColor(sf::Color::Red);
                     std::cout << "Oyun bitti! Final skor: " << score << std::endl;
 
                      gameOverText.setString("GAME OVER");
+                     restartText.setString("R ile yeniden basla");
                     window.setTitle("GAME OVER | Final skor: " + std::to_string(score));
                 }
             }
@@ -124,6 +143,7 @@ gameOverText.setFillColor(sf::Color::Red);
         window.draw(nextText);
         nextPiece.drawPreview(window, 400, 270); 
         window.draw(gameOverText);
+        window.draw(restartText);
 
 
         if (!gameOver) {

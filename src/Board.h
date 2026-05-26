@@ -18,6 +18,7 @@ public:
     bool canPlaceBlocks(const std::vector<sf::Vector2i>& blocks) const;
     void placeBlocks(const std::vector<sf::Vector2i>& blocks,int colorId);
     int clearFullRows();
+    void reset();
     void draw(sf::RenderWindow& window);
 };
 
