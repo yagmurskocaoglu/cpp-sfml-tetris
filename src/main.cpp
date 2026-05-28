@@ -57,8 +57,11 @@ int main() {
    separator.setFillColor(sf::Color(80, 80, 80));
 
    sf::Font font;
+
 if (!font.openFromFile("assets/arial.ttf")) {
-    std::cout << "Font dosyasi yuklenemedi!" << std::endl;
+    if (!font.openFromFile("../assets/arial.ttf")) {
+        std::cout << "Font dosyasi yuklenemedi!" << std::endl;
+    }
 }
 
 sf::Text titleText(font, "TETRIS", 36);
