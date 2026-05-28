@@ -85,6 +85,10 @@ sf::Text restartText(font, "", 20);
 restartText.setPosition(sf::Vector2f(350, 400));
 restartText.setFillColor(sf::Color::White);
 
+sf::Text controlsText(font, "Kontroller:\nSol/Sag: Hareket\nAsagi: Hizli dusur\nYukari: Dondur\nR: Yeniden baslat", 18);
+controlsText.setPosition(sf::Vector2f(350, 460));
+controlsText.setFillColor(sf::Color::White);
+
 
     window.setTitle("Tetris | Skor: " + std::to_string(score));
 
@@ -179,10 +183,13 @@ restartText.setFillColor(sf::Color::White);
         window.draw(titleText);
 
         window.draw(scoreText);
-        window.draw(nextText);
-        nextPiece.drawPreview(window, 400, 280); 
+        if (!gameOver) {
+    window.draw(nextText);
+    nextPiece.drawPreview(window, 400, 280);
+}
         window.draw(gameOverText);
         window.draw(restartText);
+        window.draw(controlsText);
         window.draw(highScoreText);
 
 
