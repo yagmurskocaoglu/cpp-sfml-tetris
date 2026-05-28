@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <fstream>
 #include <optional>
 #include <iostream>
 #include <cstdlib>
@@ -6,6 +7,33 @@
 #include <string>
 #include "Board.h"
 #include "Tetromino.h"
+
+
+int loadHighScore() {
+    std::ifstream file("highscore.txt");
+
+    int highScore = 0;
+
+    if (file.is_open()) {
+        file >> highScore;
+        file.close();
+    }
+
+    return highScore;
+}
+
+void saveHighScore(int highScore) {
+    std::ofstream file("highscore.txt");
+
+    if (file.is_open()) {
+        file << highScore;
+        file.close();
+    }
+}
+
+
+
+
 
 int main() {
     std::srand(static_cast<unsigned>(std::time(nullptr)));
@@ -15,6 +43,10 @@ int main() {
     Board board(20, 10, 30);
     Tetromino currentPiece(30);
     Tetromino nextPiece(30);
+
+    int score = 0;
+    int highScore = loadHighScore();
+    bool gameOver = false;
 
     sf::RectangleShape sidePanel(sf::Vector2f(500, 600));
    sidePanel.setPosition(sf::Vector2f(300, 0));
@@ -38,8 +70,12 @@ scoreText.setPosition(sf::Vector2f(380, 160));
 scoreText.setFillColor(sf::Color::White);
 
 sf::Text nextText(font, "Sonraki:", 24);
-nextText.setPosition(sf::Vector2f(380, 220));
+nextText.setPosition(sf::Vector2f(380, 230));
 nextText.setFillColor(sf::Color::White);
+
+sf::Text highScoreText(font, "En Yuksek: " + std::to_string(highScore), 24);
+highScoreText.setPosition(sf::Vector2f(380, 190));
+highScoreText.setFillColor(sf::Color::White);
 
 sf::Text gameOverText(font, "", 28);
 gameOverText.setPosition(sf::Vector2f(360, 260));
@@ -49,9 +85,6 @@ sf::Text restartText(font, "", 20);
 restartText.setPosition(sf::Vector2f(350, 400));
 restartText.setFillColor(sf::Color::White);
 
-
-    int score = 0;
-    bool gameOver = false;
 
     window.setTitle("Tetris | Skor: " + std::to_string(score));
 
@@ -122,6 +155,12 @@ restartText.setFillColor(sf::Color::White);
                     gameOver = true;
                     std::cout << "Oyun bitti! Final skor: " << score << std::endl;
 
+                    if (score > highScore) {
+        highScore = score;
+        saveHighScore(highScore);
+        highScoreText.setString("En Yuksek: " + std::to_string(highScore));
+    }
+
                      gameOverText.setString("GAME OVER");
                      restartText.setString("R ile yeniden basla");
                     window.setTitle("GAME OVER | Final skor: " + std::to_string(score));
@@ -141,9 +180,10 @@ restartText.setFillColor(sf::Color::White);
 
         window.draw(scoreText);
         window.draw(nextText);
-        nextPiece.drawPreview(window, 400, 270); 
+        nextPiece.drawPreview(window, 400, 280); 
         window.draw(gameOverText);
         window.draw(restartText);
+        window.draw(highScoreText);
 
 
         if (!gameOver) {
